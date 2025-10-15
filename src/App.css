@@ -1,3 +1,14 @@
 #root {
   background-color: #f8fafc;
 }
+.search-form {
+  background-color: #fff;
+  box-shadow: 0 0 5px 0px gray;
+  width: 40%;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 30px;
+}
