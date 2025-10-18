@@ -8,6 +8,44 @@ function App() {
   const [cocktails, setCocktails] = useState([]);
   const [selectedCocktail, setSelectedCocktail] = useState(false);
   const [searchValue, setSearchValue] = useState("a");
+
+  return (
+    <>
+      {!selectedCocktail && (
+        <form className={`search-form `} onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className="text-input"
+            id="text-input"
+            name="text-input"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <button type="submit" className="search-btn">
+            Search
+          </button>
+        </form>
+      )}
+      <ul className={`list ${!selectedCocktail ? "" : "hidden"}`}>
+        {cocktails.map((cocktail) => {
+          return (
+            <Cocktail
+              key={cocktail.idDrink}
+              {...cocktail}
+              onSelect={() => setSelectedCocktail(cocktail.idDrink)}
+            />
+          );
+        })}
+      </ul>
+      {selectedCocktail ? (
+        <CocktailInfoCard
+          cocktailId={selectedCocktail}
+          onSelect={() => setSelectedCocktail(false)}
+        />
+      ) : (
+        ""
+      )}
+    </>
+  );
 }
 
 export default App;
