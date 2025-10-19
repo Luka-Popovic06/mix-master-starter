@@ -8,7 +8,24 @@ function App() {
   const [cocktails, setCocktails] = useState([]);
   const [selectedCocktail, setSelectedCocktail] = useState(false);
   const [searchValue, setSearchValue] = useState("a");
+  const fetchCocktails = (query) => {
+    axios
+      .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`)
+      .then((cocktails) => {
+        setCocktails(cocktails.data.drinks);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchCocktails(searchValue);
+  }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchCocktails(searchValue);
+  };
   return (
     <>
       {!selectedCocktail && (
